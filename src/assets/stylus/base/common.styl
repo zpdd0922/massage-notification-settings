@@ -1,0 +1,46 @@
+@import 'variable.styl'
+@import 'mixin.styl'
+body, html
+  line-height 1
+  font-family 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif, 'Droid Sans Fallback'
+  user-select none
+  -webkit-tap-highlight-color transparent
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+.font-red
+  color $color-red
+.font-green
+  color $color-green
+.font-white
+  color $color-white
+.font-333
+  color $color-333
+.font-666
+  color $color-666
+.font-999
+  color $color-999
+.font-333
+  color $color-333
+
+
+// 全局的入场动画
+.fade-enter-active, .fade-leave-active
+  transition all 0.2s
+.fade-enter, .fade-leave-to
+  transform translate3d(35%, 0, 0)
+  opacity 0
+
+
+// flex布局
+.flex
+  display flex
+  .flex-item
+    flex 1
+    position relative
+
+// 针对伪类样式图片
+.pseudo
+  position relative
+  &:before, &:after
+    content '\0020'
+    position absolute
