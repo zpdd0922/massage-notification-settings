@@ -39,44 +39,43 @@ export function toDBC(Str) {
 
 // 手机号码中间四位加密
 export function formatPhone(phone) {
-  return phone.replace(/(\d{3})\d{4}(\d{4})/, "$1****$2")
+  return phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
 }
 
 // 犇犇号中间四位加密
 export function formatUserId(userId) {
-  const s= String(userId)
-  return s.replace(/(\d{1})\d{4}(\d{2})/, "$1****$2")
+  const s = String(userId)
+  return s.replace(/(\d{1})\d{4}(\d{2})/, '$1****$2')
 }
 
 // 犇犇号中间2位加密
 export function formatUserCode(userId) {
-  const s= String(userId)
-  return s.replace(/(\d{2})\d{2}(\d{2})/, "$1**$2")
+  const s = String(userId)
+  return s.replace(/(\d{2})\d{2}(\d{2})/, '$1**$2')
 }
 
 // 小数转化为百分数
-export function toPercent(point){
-  var str=Number(point*100).toFixed(1);
-  str+="%";
-  return str;
+export function toPercent(point) {
+  var str = Number(point * 100).toFixed(1)
+  str += '%'
+  return str
 }
 
-export function slicePhoneRegion(val){
-  const phoneHead = val.slice(0,2)
-  const result = phoneHead ==='86'? true :false
-  if(result) {
+export function slicePhoneRegion(val) {
+  const phoneHead = val.slice(0, 2)
+  const result = phoneHead === '86'
+  if (result) {
     return val.slice(2)
-  }
-  else {
+  } else {
     return val
   } 
 }
 
 // 删除数组特定值
-export function removeArrayVal(arr, val){
-  for(var i=0; i<arr.length; i++) {
-    if(arr[i] == val) {
-      arr.splice(i, 1);
+export function removeArrayVal(arr, val) {
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] === val) {
+      arr.splice(i, 1)
       return arr
     }
   }

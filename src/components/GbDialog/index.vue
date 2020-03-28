@@ -27,7 +27,7 @@ export default {
     mask: {
       type: Boolean,
       default: true
-    },
+    }
   },
   data () {
     return {}
@@ -38,7 +38,7 @@ export default {
     hide() {
       // 同步属性
       this.$emit('update:visible', false)
-    },
+    }
     // handleCancel(e) {
     //   this.hide()
     //   this.$emit('cancel', e)
@@ -83,7 +83,6 @@ export default {
     transform translate(-50%,-50%)
     box-sizing border-box
 
-
 .popup-mask, .popup-wrap
   position absolute
   width 100%
@@ -111,8 +110,5 @@ export default {
     transform scale(1.1)
   100%
     transform scale(1)
-
-
-
 
 </style>

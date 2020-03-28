@@ -1,8 +1,7 @@
 /* eslint-disable */
-// 配置文件，适用非生产环境
 
-// 请求地址
-var HOST_URL = location.origin
+// 请求9003端口
+var HOST_URL = window.HOST_BASE_URL
 
 // 统一用户模块
 var USER_CENTER = HOST_URL + '/sunline/user-center/index.html'

@@ -1,7 +1,6 @@
 import axios from '../axios'
 import paramsData from '../params/params-wrap'
 
-
 export default {
   // 获取邀请人信息
   /**
@@ -26,7 +25,6 @@ export default {
    * @params sessionId
    */
   fetchInviteRank: params => axios.post('/activity_api/invite_rank', paramsData.COMMON(params)),
-
 
   // 奖励牛人榜
   /**
@@ -57,7 +55,6 @@ export default {
    * @params sessionId
    */
   fetchWithdrawMoney: params => axios.post('/activity_api/withdraw_money', paramsData.COMMON(params)),
-
 
   // 校验手机号码是否已短信邀请
   /**
@@ -120,14 +117,11 @@ export default {
    */
   fetchTransferRewardSetting: params => axios.post('/activity_api/transfer_reward_setting', paramsData.COMMON(params)),
 
-
   // 记录分享信息
   /**
    * @params sessionId
    */
   getShareRecord: params => axios.post('/activ_api/share_record', paramsData.COMMON(params)),
-
-
 
   /**
    * 获取开户状态
@@ -171,5 +165,5 @@ export default {
    * bankType ==> 银行账户类型 [0-香港银行卡 1-大陆银行卡]
    */
   getOpenBankType: data =>
-    axios.post('/open_api/get_open_bank_type', paramsData.COMMON(data)),
+    axios.post('/open_api/get_open_bank_type', paramsData.COMMON(data))
 }

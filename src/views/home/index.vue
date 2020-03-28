@@ -48,7 +48,6 @@
       </div>
     </div>
 
-
   </div>
 </template>
 
@@ -59,7 +58,7 @@ const DEFAULT_TAB = [{
   id: 1, name: '证券服务', page: 'security'
 }, {
   id: 2, name: '新股申购', page: 'ipo'
-},{
+}, {
   id: 3, name: '其他', page: 'other'
 }]
 
@@ -70,76 +69,76 @@ export default {
       tabName: 'security',
       tabs: DEFAULT_TAB,
       phoneNum: '136****6102', // 绑定的手机号码
-      securityData:[
+      securityData: [
         {
-          label:'出入金受理提醒',
+          label: '出入金受理提醒',
           value: true,
-          name:'depositHandle'
+          name: 'depositHandle'
         },
         {
-          label:'出入金成功提醒',
+          label: '出入金成功提醒',
           value: true,
-          name:'depositSuccess'
+          name: 'depositSuccess'
         },
         {
-          label:'转仓受理提醒',
+          label: '转仓受理提醒',
           value: true,
-          name:'transferHandle'
+          name: 'transferHandle'
         },
         {
-          label:'转仓成功提醒',
+          label: '转仓成功提醒',
           value: true,
-          name:'transferSuccess'
+          name: 'transferSuccess'
         },
         {
-          label:'Level2行情生效提醒',
+          label: 'Level2行情生效提醒',
           value: true,
-          name:'quoteValid'
+          name: 'quoteValid'
         },
         {
-          label:'Level2行情到期提醒',
+          label: 'Level2行情到期提醒',
           value: true,
-          name:'quoteOutdate'
+          name: 'quoteOutdate'
         },
         {
-          label:'免佣生效提醒',
+          label: '免佣生效提醒',
           value: true,
-          name:'freeValid'
+          name: 'freeValid'
         },
         {
-          label:'免佣到期提醒',
+          label: '免佣到期提醒',
           value: true,
-          name:'freeOutdate'
-        },
+          name: 'freeOutdate'
+        }
       ],
-      ipoData:[
+      ipoData: [
         {
-          label:'新股可申购提醒',
+          label: '新股可申购提醒',
           value: true,
-          name:'ipoCanApply'
+          name: 'ipoCanApply'
         },
         {
-          label:'新股申购成功提醒',
+          label: '新股申购成功提醒',
           value: true,
-          name:'ipoApplySuccess'
+          name: 'ipoApplySuccess'
         },
         {
-          label:'新股中签提醒',
+          label: '新股中签提醒',
           value: true,
-          name:'ipoGetStock'
-        },
+          name: 'ipoGetStock'
+        }
       ],
       otherData: [
         {
-          label:'股价提醒',
+          label: '股价提醒',
           value: true,
-          name:'stockPrice'
+          name: 'stockPrice'
         },
         {
-          label:'打新牛人提醒',
+          label: '打新牛人提醒',
           value: true,
-          name:'ipoPriceMan'
-        },
+          name: 'ipoPriceMan'
+        }
       ]
     }
   },
@@ -152,9 +151,9 @@ export default {
       this.tabIndex = index
       this.tabName = item.page
     },
-    handleSwitch(value,name) {
-      console.log('this value',value)
-      console.log('this value',name)
+    handleSwitch(value, name) {
+      console.log('this value', value)
+      console.log('this value', name)
     }
   }
 }
