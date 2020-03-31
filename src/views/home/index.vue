@@ -7,134 +7,142 @@
     <!-- tab切换栏 -->
     <div class="home-tab">
       <ul class="flex border-bottom-1px">
-        <li v-for="(item, index) in tabs"
-            :key="index"
-            :class="['flex-item', (tabIndex === index) && 'active']"
-            @click="handleTabClick(item, index)">{{item.name}}</li>
+        <li v-for="(item) in tabs"
+            :key="item.id"
+            :class="['flex-item', (tabIndex === item.id) && 'active']"
+            @click="handleTabClick(item)">{{item.name}}</li>
       </ul>
     </div>
     <!-- 内容区域 -->
     <div class="home-panel">
       <!-- 证券服务内容区 -->
-      <div v-if="tabIndex===0" class="content">
+      <div class="content" v-if="showList(0)">
         <!-- 开关组件 -->
         <ul class="switchWrap">
           <li class="switchItem" v-for="(item,index) in securityData" :key="index">
             <p class="label">{{item.label}}</p>
-            <cube-switch v-model="item.value" class="switch-btn" @input="handleSwitch(item.value,item.name)">
-            </cube-switch>
+            <cube-switch v-model="item.value" class="switch-btn" @input="handleSwitch(item)"></cube-switch>
           </li>
         </ul>
       </div>
       <!-- 新股申购内容区 -->
-      <div v-if="tabIndex===1" class="content">
+      <div class="content" v-if="showList(1)">
         <ul class="switchWrap">
           <li class="switchItem2" v-for="(item,index) in ipoData" :key="index">
             <p class="label">{{item.label}}</p>
-            <cube-switch v-model="item.value" class="switch-btn" @input="handleSwitch(item.value,item.name)">
-            </cube-switch>
+            <cube-switch v-model="item.value" class="switch-btn" @input="handleSwitch(item)"></cube-switch>
           </li>
         </ul>
       </div>
       <!-- 其他内容区 -->
-      <div v-if="tabIndex===2" class="content">
+      <div class="content" v-if="showList(2)">
         <ul class="switchWrap">
           <li class="switchItem" v-for="(item,index) in otherData" :key="index">
             <p class="label">{{item.label}}</p>
-            <cube-switch v-model="item.value" class="switch-btn" @input="handleSwitch(item.value,item.name)">
-            </cube-switch>
+            <cube-switch v-model="item.value" class="switch-btn" @input="handleSwitch(item)"></cube-switch>
           </li>
         </ul>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 
-const DEFAULT_TAB = [{
-  id: 1, name: '证券服务', page: 'security'
-}, {
-  id: 2, name: '新股申购', page: 'ipo'
-}, {
-  id: 3, name: '其他', page: 'other'
-}]
-
 export default {
   data() {
     return {
       tabIndex: 0,
       tabName: 'security',
-      tabs: DEFAULT_TAB,
+      tabs: [
+        { id: 0, name: '证券服务', page: 'security' }, 
+        { id: 1, name: '新股申购', page: 'ipo' },
+        { id: 2, name: '其他', page: 'other' }
+      ],
       phoneNum: '136****6102', // 绑定的手机号码
+      // 证券服务
       securityData: [
         {
+          key: 101,
           label: '出入金受理提醒',
           value: true,
-          name: 'depositHandle'
+          name: 'deposHandle'
         },
         {
+          key: 102,
           label: '出入金成功提醒',
           value: true,
           name: 'depositSuccess'
         },
         {
+          key: 103,
           label: '转仓受理提醒',
           value: true,
           name: 'transferHandle'
         },
         {
+          key: 104,
           label: '转仓成功提醒',
           value: true,
           name: 'transferSuccess'
         },
         {
+          key: 105,
           label: 'Level2行情生效提醒',
           value: true,
           name: 'quoteValid'
         },
         {
+          key: 106,
           label: 'Level2行情到期提醒',
           value: true,
           name: 'quoteOutdate'
         },
         {
+          key: 107,
           label: '免佣生效提醒',
           value: true,
           name: 'freeValid'
         },
         {
+          key: 108,
           label: '免佣到期提醒',
           value: true,
           name: 'freeOutdate'
         }
       ],
+      // 新股申购
       ipoData: [
         {
+          key: 109,
           label: '新股可申购提醒',
           value: true,
           name: 'ipoCanApply'
         },
         {
+          key: 110,
           label: '新股申购成功提醒',
           value: true,
           name: 'ipoApplySuccess'
         },
         {
+          key: 111,
           label: '新股中签提醒',
           value: true,
           name: 'ipoGetStock'
         }
       ],
+      // 其他
       otherData: [
         {
+          key: 112,
           label: '股价提醒',
           value: true,
           name: 'stockPrice'
         },
         {
+          key: 113,
           label: '打新牛人提醒',
           value: true,
           name: 'ipoPriceMan'
@@ -146,15 +154,73 @@ export default {
     ...mapGetters(['userInfo'])
   },
   methods: {
-    // tab切换
-    handleTabClick(item, index) {
-      this.tabIndex = index
-      this.tabName = item.page
+    // 显示列表
+    showList(idx) {
+      return this.tabIndex === idx
     },
-    handleSwitch(value, name) {
-      console.log('this value', value)
-      console.log('this value', name)
+    // tab切换
+    handleTabClick(item) {
+      const { id, page } = item
+      this.tabIndex = id
+      this.tabName = page
+    },
+    handleSwitch(data) {
+      const { key, value } = data
+      const params = {
+        busType: 5,
+        tempCode: key,
+        isClose: value
+      }
+      this.$store.dispatch('openOrCloseForInfrom', params)
+    },
+    // 获取用户配置信息
+    getList() {
+      const params = {
+        busType: 5
+      }
+      this.$store.dispatch('findUserInformRegs', params).then(res => {
+        this.securityData = this.securityData.map(v => {
+          const key = res[v.key]
+          let value = true
+          if (key === false) {
+            value = false
+          }
+          return {
+            ...v,
+            value
+          }
+        })
+      })
+      this.$store.dispatch('findUserInformRegs', params).then(res => {
+        this.ipoData = this.ipoData.map(v => {
+          const key = res[v.key]
+          let value = true
+          if (key === false) {
+            value = false
+          }
+          return {
+            ...v,
+            value
+          }
+        })
+      })
+      this.$store.dispatch('findUserInformRegs', params).then(res => {
+        this.otherData = this.otherData.map(v => {
+          const key = res[v.key]
+          let value = true
+          if (key === false) {
+            value = false
+          }
+          return {
+            ...v,
+            value
+          }
+        })
+      })
     }
+  },
+  created() {
+    this.getList()
   }
 }
 </script>

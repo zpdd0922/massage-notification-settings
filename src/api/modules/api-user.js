@@ -1,19 +1,39 @@
-import axios from '../axios'
+import apiAsync from '../axios'
+import { InterFaceUrl } from '../config'
 
 export default {
 
   /**
    * 获取用户IP
-   *
+   *  0 香港 1 大陆
    */
-  getIpAddr: () => axios.get('/user_api/get_ip_addr'),
+  getIpAddr: () => apiAsync({
+    method: 'get',
+    url: InterFaceUrl('/user_api/get_ip_addr')
+  }),
+
+  isMediaShow: data => apiAsync({
+    method: 'post',
+    url: InterFaceUrl('/user_api/is_media_show'),
+    data: data,
+    loading: true,
+    catchs: true,
+    toast: true
+  }),
 
   /**
    * 是否登录
    *
    * @return JSON/Boolean
    */
-  checkLogin: data => axios.post('/user_api/is_login', data),
+  checkLogin: data => apiAsync({
+    method: 'post',
+    url: InterFaceUrl('/user_api/is_login'),
+    data: data,
+    loading: true,
+    catchs: true,
+    toast: true
+  }),
 
   /**
    * 登录
@@ -22,31 +42,49 @@ export default {
    * @param pwd 密码
    * @param invUserId int 推荐人id,默认：1
    * @param captcha 验证码
-   * @param eventId    验证码相关ID
    * @param sourceCode 活动渠道
    * @param certType 类型
    * 0 手机 | 1 邮箱 | 2 微信APP openId
    * 3 微博 | 4 QQ   | 5 微信uniconid
    * 6 微信公众号 |  7 交易账号 | 8 犇犇号
-   * 9 免密登录
    *
    * @return JSON { code: integer, message: string, result: {} }
    */
-  login: data => axios.post('/user_api/user_login', data),
+  login: data => apiAsync({
+    method: 'post',
+    url: InterFaceUrl('/user_api/user_login'),
+    data: data,
+    loading: true,
+    catchs: true,
+    toast: true
+  }),
 
   /**
    * 登出
    *
    * @return JSON { code: integer, message: string, result: {} }
    */
-  logout: () => axios.post('/user_api/loginOut'),
+  logout: () => apiAsync({
+    method: 'post',
+    url: InterFaceUrl('/user_api/loginOut'),
+    loading: true,
+    catchs: true,
+    toast: true
+  }),
 
   /**
    * 是否需要图形验证码
    *
    * @return JSON { code: integer, message: string, result: true/false}
    */
-  needCaptcha: data => axios.post('/capt/needCaptcha', data),
+  needCaptcha: data => apiAsync({
+    method: 'post',
+    url: InterFaceUrl('/capt/needCaptcha'),
+    data: data,
+    loading: true,
+    catchs: true,
+    toast: true
+  }),
 
   /**
    * 注册
@@ -64,7 +102,14 @@ export default {
    *
    * @return JSON { code: integer, message: string, result: {}}
    */
-  register: data => axios.post('/user_api/user_register', data),
+  register: data => apiAsync({
+    method: 'post',
+    url: InterFaceUrl('/user_api/user_register'),
+    data: data,
+    loading: true,
+    catchs: true,
+    toast: true
+  }),
 
   /**
    * 检查手机号码是否可用
@@ -73,7 +118,14 @@ export default {
    *
    * @return JSON { code: integer, message: string, result: {}}
    */
-  checkMobile: data => axios.post('/user_api/valid_phone', data),
+  checkMobile: data => apiAsync({
+    method: 'post',
+    url: InterFaceUrl('/user_api/valid_phone'),
+    data: data,
+    loading: true,
+    catchs: true,
+    toast: true
+  }),
 
   /**
    * 发送短信验证码
@@ -83,7 +135,14 @@ export default {
    *
    * @return JSON { code: integer, message: string, result: {eventId}}
    */
-  sendCode: data => axios.post('/user_api/reg_valcode', data),
+  sendCode: data => apiAsync({
+    method: 'post',
+    url: InterFaceUrl('/user_api/reg_valcode'),
+    data: data,
+    loading: true,
+    catchs: true,
+    toast: true
+  }),
 
   /**
    * 检查验证码是否可用
@@ -94,7 +153,14 @@ export default {
    * @param certType 默认类型 --> 手机：0
    *
    */
-  checkCode: data => axios.post('/user_api/repeat_valid_captcha', data),
+  checkCode: data => apiAsync({
+    method: 'post',
+    url: InterFaceUrl('/user_api/repeat_valid_captcha'),
+    data: data,
+    loading: true,
+    catchs: true,
+    toast: true
+  }),
 
   /**
    * 更换手机 --> 绑定手机
@@ -109,7 +175,14 @@ export default {
    *
    * @return JSON { code: integer, message: string, result: {}}
    */
-  updateMobile: data => axios.post('/user_api/update_user_phone_num', data),
+  updateMobile: data => apiAsync({
+    method: 'post',
+    url: InterFaceUrl('/user_api/update_user_phone_num'),
+    data: data,
+    loading: true,
+    catchs: true,
+    toast: true
+  }),
 
   /**
    * 修改登录密码
@@ -119,7 +192,14 @@ export default {
    *
    * @return JSON { code: integer, message: string, result: {} }
    */
-  updatePassword: data => axios.post('/user_api/update_pwd', data),
+  updatePassword: data => apiAsync({
+    method: 'post',
+    url: InterFaceUrl('/user_api/update_pwd'),
+    data: data,
+    loading: true,
+    catchs: true,
+    toast: true
+  }),
 
   /**
    * 修改交易密码
@@ -129,14 +209,28 @@ export default {
    *
    * @return JSON { code: integer, message: string, result: {} }
    */
-  updateTradePassword: data => axios.post('/user_api/update_trade_pwd', data),
+  updateTradePassword: data => apiAsync({
+    method: 'post',
+    url: InterFaceUrl('/user_api/update_trade_pwd'),
+    data: data,
+    loading: true,
+    catchs: true,
+    toast: true
+  }),
 
   /**
    * 获取用户渠道类别
    * @method POST/JSON user_api/find_chl_skip
    * @return JSON { code: integer, message: string, result }
    */
-  getUserType: data => axios.post('/user_api/find_chl_skip', data),
+  getUserType: data => apiAsync({
+    method: 'post',
+    url: InterFaceUrl('/user_api/find_chl_skip'),
+    data: data,
+    loading: true,
+    catchs: true,
+    toast: true
+  }),
 
   /**
    * 忘记密码 --> 重置登录密码
@@ -146,5 +240,12 @@ export default {
    * @param newPwd 新密码
    * @param eventId   验证码相关ID
    */
-  resetPassword: data => axios.post('/user_api/user_back_pwd', data)
+  resetPassword: data => apiAsync({
+    method: 'post',
+    url: InterFaceUrl('/user_api/user_back_pwd'),
+    data: data,
+    loading: true,
+    catchs: true,
+    toast: true
+  })
 }

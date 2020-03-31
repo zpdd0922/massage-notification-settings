@@ -4,18 +4,15 @@ const PostCompilePlugin = require('webpack-post-compile-plugin')
 
 const resolve = dir => path.join(__dirname, dir)
 
-// 开发环境
-// const target = 'http://10.1.5.126:9003'
-// 测试环境
-const target = 'http://10.1.5.125:9003'
-// 代理对象
+// 代理对象 - 依据api/config内配置同步地址
 const proxy = {}
 const prefixs = [
   {
-    path: '/dev',
-    target,
+    path: '/dev-url',
+    // target: 'http://121.35.249.14:9003',
+    target: 'http://10.1.2.20:9003',
     pathRewrite: {
-      '^/dev': ''
+      '^/dev-url': ''
     }
   }
 ]
