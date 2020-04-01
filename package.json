@@ -6,7 +6,7 @@
     "start": "npm run dev",
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "uat": "vue-cli-service build --mode uat",
+    "build:debug": "vue-cli-service build --mode debug",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

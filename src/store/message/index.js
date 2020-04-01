@@ -32,6 +32,17 @@ const actions = {
           console.log(err)
         })
     })
+  },
+  findWxLogin({ commit, state }, params) {
+    return new Promise((resolve, reject) => {
+      messageApi.findWxLogin(paramsData.NO_SESSION(params))
+        .then(res => {
+          resolve(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    })
   }
 }
 

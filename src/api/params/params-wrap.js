@@ -36,9 +36,16 @@ const PHONE = (data = {}) => ({
   ...data
 })
 
+// 不需要session
+const NO_SESSION = (data = {}) => ({
+  requestSrc: auth.getDevice(),
+  ...data
+})
+
 export default {
   WRAP,
   OPTIONS,
   COMMON,
-  PHONE
+  PHONE,
+  NO_SESSION
 }

@@ -19,5 +19,14 @@ export default {
     loading: true,
     catchs: true,
     toast: true
+  }),
+  // 开启OR关闭消息通知设置 
+  findWxLogin: data => apiAsync({
+    method: 'post',
+    url: InterFaceUrl('/weixin_api/find_wx_login'),
+    data: data,
+    loading: true,
+    catchs: true,
+    toast: true
   })
 }

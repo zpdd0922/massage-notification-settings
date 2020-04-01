@@ -257,6 +257,12 @@ const actions = {
           console.log(err)
         })
     })
+  },
+  wxLogin({ commit, state }, param) {
+    return new Promise((resolve, reject) => {
+      commit(types.SET_USER_INFO, { result: param })
+      resolve(param)
+    })
   }
 }
 

@@ -49,6 +49,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { getURLParameters } from '@/utils/url'
+import ua from '@/utils/ua-parser'
 
 export default {
   data() {
@@ -173,6 +175,25 @@ export default {
       }
       this.$store.dispatch('openOrCloseForInfrom', params)
     },
+    // 维系自动授权
+    async findWxLogin() {
+      const isWx = ua.isWX()
+      if (isWx) {
+        const { openId } = getURLParameters()
+        const params = {
+          openId
+        }
+        console.log('openId', openId)
+        const userInfo = await this.$store.dispatch('findWxLogin', params)
+          .catch(err => {
+            alert(err)
+          })
+        await this.$store.dispatch('wxLogin', userInfo)
+        this.getList()
+      } else {
+        this.getList()
+      }
+    },
     // 获取用户配置信息
     getList() {
       const params = {
@@ -190,8 +211,6 @@ export default {
             value
           }
         })
-      })
-      this.$store.dispatch('findUserInformRegs', params).then(res => {
         this.ipoData = this.ipoData.map(v => {
           const key = res[v.key]
           let value = true
@@ -203,8 +222,6 @@ export default {
             value
           }
         })
-      })
-      this.$store.dispatch('findUserInformRegs', params).then(res => {
         this.otherData = this.otherData.map(v => {
           const key = res[v.key]
           let value = true
@@ -220,7 +237,7 @@ export default {
     }
   },
   created() {
-    this.getList()
+    this.findWxLogin()
   }
 }
 </script>
