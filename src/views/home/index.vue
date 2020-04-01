@@ -51,6 +51,9 @@
 import { mapGetters } from 'vuex'
 import { getURLParameters } from '@/utils/url'
 import ua from '@/utils/ua-parser'
+import storage from '@/utils/storage'
+import { KEY_USER_INFO } from '@/api/config'
+import { alert } from '@/utils/tips'
 
 export default {
   data() {
@@ -62,7 +65,7 @@ export default {
         { id: 1, name: '新股申购', page: 'ipo' },
         { id: 2, name: '其他', page: 'other' }
       ],
-      phoneNum: '136****6102', // 绑定的手机号码
+      phoneNum: '', // 绑定的手机号码
       // 证券服务
       securityData: [
         {
@@ -184,18 +187,24 @@ export default {
           openId
         }
         console.log('openId', openId)
-        const userInfo = await this.$store.dispatch('findWxLogin', params)
-          .catch(err => {
-            alert(err)
+        this.$store.dispatch('findWxLogin', params).then((res) => {
+          this.$store.dispatch('wxLogin', res).then(() => {
+            this.getList()
           })
-        await this.$store.dispatch('wxLogin', userInfo)
-        this.getList()
+        }).catch(err => {
+          alert({
+            title: '温馨提示',
+            content: err.message
+          })
+        })
       } else {
         this.getList()
       }
     },
     // 获取用户配置信息
     getList() {
+      const uInfo = storage.get(KEY_USER_INFO)
+      this.phoneNum = uInfo.phoneNum
       const params = {
         busType: 5
       }

@@ -27,6 +27,6 @@ export default {
     data: data,
     loading: true,
     catchs: true,
-    toast: true
+    toast: false
   })
 }

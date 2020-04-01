@@ -9,8 +9,8 @@ const proxy = {}
 const prefixs = [
   {
     path: '/dev-url',
-    // target: 'http://121.35.249.14:9003',
-    target: 'http://10.1.2.20:9003',
+    target: 'http://121.35.249.14:9003',
+    // target: 'http://10.1.2.20:9003',
     pathRewrite: {
       '^/dev-url': ''
     }

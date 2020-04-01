@@ -9,7 +9,11 @@ export default {
    * Example: setStorage('key', { a1: '111', a2: 222 })-> key:{ a1: '111', a2: 222 }
    */
   set(key, val) {
-    window.localStorage.setItem(key, JSON.stringify(val))
+    try {
+      window.localStorage.setItem(key, JSON.stringify(val))
+    } catch (error) {
+      alert('JSON解析错误')
+    }
   },
   /**
    * 获取Storage
@@ -18,9 +22,13 @@ export default {
    * Example: getStorage('key')-> { a1: '111', a2: 222 }
    */
   get(key) {
-    let storageVal = localStorage.getItem(key)
-    storageVal = !storageVal ? '' : JSON.parse(storageVal)
-    return storageVal
+    try {
+      let storageVal = localStorage.getItem(key)
+      storageVal = !storageVal ? '' : JSON.parse(storageVal)
+      return storageVal
+    } catch (error) {
+      alert('JSON解析错误')
+    }
   },
   /**
    * 判断是否有对应key值的storage， 如果没有返回指定的key值则可以自定义默认值，不设置则返回布尔值
