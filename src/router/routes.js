@@ -17,7 +17,7 @@ const routes = [
     path: '/',
     name: 'home',
     component: _import('home'),
-    meta: { title: '首页', whiteAuth: process.env.NODE_ENV === 'production' }
+    meta: { title: '', whiteAuth: process.env.NODE_ENV === 'production' }
   },
   // 用户登录注册模块
   ...userRouter,

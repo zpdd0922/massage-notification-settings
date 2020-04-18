@@ -53,7 +53,6 @@ import { getURLParameters } from '@/utils/url'
 import ua from '@/utils/ua-parser'
 import storage from '@/utils/storage'
 import { KEY_USER_INFO } from '@/api/config'
-import { alert } from '@/utils/tips'
 
 export default {
   data() {
@@ -80,36 +79,36 @@ export default {
           value: true,
           name: 'depositSuccess'
         },
-        {
-          key: 103,
-          label: '转仓受理提醒',
-          value: true,
-          name: 'transferHandle'
-        },
+        // {
+        //   key: 103,
+        //   label: '转仓受理提醒',
+        //   value: true,
+        //   name: 'transferHandle'
+        // },
         {
           key: 104,
           label: '转仓成功提醒',
           value: true,
           name: 'transferSuccess'
         },
-        {
-          key: 105,
-          label: 'Level2行情生效提醒',
-          value: true,
-          name: 'quoteValid'
-        },
+        // {
+        //   key: 105,
+        //   label: 'Level2行情生效提醒',
+        //   value: true,
+        //   name: 'quoteValid'
+        // },
         {
           key: 106,
           label: 'Level2行情到期提醒',
           value: true,
           name: 'quoteOutdate'
         },
-        {
-          key: 107,
-          label: '免佣生效提醒',
-          value: true,
-          name: 'freeValid'
-        },
+        // {
+        //   key: 107,
+        //   label: '免佣生效提醒',
+        //   value: true,
+        //   name: 'freeValid'
+        // },
         {
           key: 108,
           label: '免佣到期提醒',
@@ -178,7 +177,7 @@ export default {
       }
       this.$store.dispatch('openOrCloseForInfrom', params)
     },
-    // 维系自动授权
+    // 微信自动授权
     async findWxLogin() {
       const isWx = ua.isWX()
       if (isWx) {
@@ -191,11 +190,8 @@ export default {
           this.$store.dispatch('wxLogin', res).then(() => {
             this.getList()
           })
-        }).catch(err => {
-          alert({
-            title: '温馨提示',
-            content: err.message
-          })
+        }).catch(() => {
+          window.location.href = `${window.BIND_PAG}?openId=${openId}`
         })
       } else {
         this.getList()
@@ -204,7 +200,8 @@ export default {
     // 获取用户配置信息
     getList() {
       const uInfo = storage.get(KEY_USER_INFO)
-      this.phoneNum = uInfo.phoneNum
+      const phone = uInfo.phoneNum.replace(/(\d{3})\d*(\d{4})/, '$1****$2')
+      this.phoneNum = phone
       const params = {
         busType: 5
       }
